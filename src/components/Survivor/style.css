@@ -1,0 +1,11 @@
+.survivor {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  transition: all 1s;
+  border-radius: 30px;
+}
+
+.isCurrentSurvivor {
+  border: 1px black solid;
+}

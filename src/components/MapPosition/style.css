@@ -1,0 +1,15 @@
+.map-position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 1px rgb(167, 167, 167) solid;
+}
+
+.door {
+  width: 2px;
+  height: 2px;
+  background-color: white;
+  position: absolute;
+}
+

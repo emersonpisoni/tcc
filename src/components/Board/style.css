@@ -1,0 +1,18 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+    align-items: center;
+    min-height: 100vh;
+    perspective: 50px;
+    position: relative;
+}
+
+.board {
+  display: grid;
+  position: relative;
+  /* transform: rotateX(6deg);
+  transition: all 1s; */
+
+}
+
