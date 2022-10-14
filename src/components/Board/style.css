@@ -11,8 +11,8 @@
 .board {
   display: grid;
   position: relative;
-  /* transform: rotateX(6deg);
-  transition: all 1s; */
+  transform: rotateX(2deg);
+  transition: all 1s;
 
 }
 

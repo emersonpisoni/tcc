@@ -4,12 +4,12 @@ import './style.css'
 export function MapPosition({ type, mapPosition, canMoveTo }) {
   return <div className="map-position" style={{
     backgroundColor: type === MAP_POSITION_TYPE.STREET ? '#d3d3d3' : '#00ff00',
-    gridColumn: mapPosition[1],
-    gridRow: mapPosition[0],
+    gridRow: mapPosition.x,
+    gridColumn: mapPosition.y,
     width: MAP_POSITION_SIZE,
     height: MAP_POSITION_SIZE,
   }}>
-    {canMoveTo.map((move) => <Door move={move} />)}
+    {canMoveTo.map((move, index) => <Door key={`door-${index}`} move={move} />)}
   </div>
 }
 

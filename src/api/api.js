@@ -4,43 +4,75 @@ export function getSurvivorsJson() {
   return [
     {
       name: 'survivor1',
-      position: [0, 0],
+      position: {
+        x: 0,
+        y: 0
+      },
       color: 'white',
     },
     {
       name: 'survivor2',
-      position: [0, 0],
+      position: {
+        x: 0,
+        y: 0
+      },
       color: 'black',
     },
     {
       name: 'survivor3',
-      position: [0, 0],
+      position: {
+        x: 0,
+        y: 0
+      },
       color: 'green',
     },
     {
       name: 'survivor4',
-      position: [0, 0],
+      position: {
+        x: 0,
+        y: 0
+      },
       color: 'purple',
     },
     {
       name: 'survivor5',
-      position: [0, 0],
+      position: {
+        x: 0,
+        y: 0
+      },
       color: 'blue',
     },
     {
       name: 'survivor6',
-      position: [0, 0],
+      position: {
+        x: 0,
+        y: 0
+      },
       color: 'red',
+    },
+    {
+      name: 'survivor7',
+      position: {
+        x: 0,
+        y: 0
+      },
+      color: 'yellow',
     },
   ]
 }
 
 export function getMapJson() {
   return {
-    initialSurvivorsPosition: [1, 3],
+    initialSurvivorsPosition: {
+      x: 3,
+      y: 1
+    },
     positions: [
       {
-        mapPosition: [1, 1],
+        mapPosition: {
+          x: 1,
+          y: 1
+        },
         type: MAP_POSITION_TYPE.ROOM,
         canMoveTo: [DIRECTIONS.RIGHT],
         freeMoveTo: null,
@@ -51,7 +83,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [1, 2],
+        mapPosition: {
+          x: 1,
+          y: 2
+        },
         type: MAP_POSITION_TYPE.ROOM,
         canMoveTo: [DIRECTIONS.LEFT],
         freeMoveTo: DIRECTIONS.DOWN,
@@ -62,7 +97,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [1, 3],
+        mapPosition: {
+          x: 1,
+          y: 3
+        },
         type: MAP_POSITION_TYPE.STREET,
         canMoveTo: [DIRECTIONS.RIGHT, DIRECTIONS.DOWN],
         freeMoveTo: null,
@@ -73,7 +111,10 @@ export function getMapJson() {
         zombieSpawnInitial: 2,
       },
       {
-        mapPosition: [1, 4],
+        mapPosition: {
+          x: 1,
+          y: 4
+        },
         type: MAP_POSITION_TYPE.STREET,
         canMoveTo: [DIRECTIONS.RIGHT, DIRECTIONS.LEFT, DIRECTIONS.DOWN],
         freeMoveTo: null,
@@ -84,7 +125,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [1, 5],
+        mapPosition: {
+          x: 1,
+          y: 5
+        },
         type: MAP_POSITION_TYPE.STREET,
         canMoveTo: [DIRECTIONS.LEFT],
         freeMoveTo: null,
@@ -95,7 +139,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [2, 1],
+        mapPosition: {
+          x: 2,
+          y: 1
+        },
         type: MAP_POSITION_TYPE.ROOM,
         canMoveTo: [DIRECTIONS.RIGHT],
         freeMoveTo: null,
@@ -106,7 +153,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [2, 2],
+        mapPosition: {
+          x: 2,
+          y: 2
+        },
         type: MAP_POSITION_TYPE.ROOM,
         canMoveTo: [DIRECTIONS.LEFT, DIRECTIONS.DOWN],
         freeMoveTo: DIRECTIONS.UP,
@@ -117,7 +167,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [2, 3],
+        mapPosition: {
+          x: 2,
+          y: 3
+        },
         type: MAP_POSITION_TYPE.STREET,
         canMoveTo: [DIRECTIONS.UP, DIRECTIONS.DOWN],
         freeMoveTo: null,
@@ -128,7 +181,10 @@ export function getMapJson() {
         zombieSpawnInitial: 1,
       },
       {
-        mapPosition: [2, 4],
+        mapPosition: {
+          x: 2,
+          y: 4
+        },
         type: MAP_POSITION_TYPE.ROOM,
         canMoveTo: [DIRECTIONS.RIGHT, DIRECTIONS.DOWN, DIRECTIONS.UP],
         freeMoveTo: null,
@@ -139,7 +195,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [2, 5],
+        mapPosition: {
+          x: 2,
+          y: 5
+        },
         type: MAP_POSITION_TYPE.ROOM,
         canMoveTo: [DIRECTIONS.LEFT, DIRECTIONS.DOWN],
         freeMoveTo: null,
@@ -150,7 +209,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [3, 1],
+        mapPosition: {
+          x: 3,
+          y: 1
+        },
         type: MAP_POSITION_TYPE.STREET,
         canMoveTo: [DIRECTIONS.RIGHT],
         freeMoveTo: null,
@@ -161,7 +223,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [3, 2],
+        mapPosition: {
+          x: 3,
+          y: 2
+        },
         type: MAP_POSITION_TYPE.STREET,
         canMoveTo: [DIRECTIONS.RIGHT, DIRECTIONS.UP, DIRECTIONS.LEFT],
         freeMoveTo: null,
@@ -172,7 +237,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [3, 3],
+        mapPosition: {
+          x: 3,
+          y: 3
+        },
         type: MAP_POSITION_TYPE.STREET,
         canMoveTo: [DIRECTIONS.RIGHT, DIRECTIONS.UP, DIRECTIONS.LEFT],
         freeMoveTo: null,
@@ -183,7 +251,10 @@ export function getMapJson() {
         zombieSpawnInitial: 1,
       },
       {
-        mapPosition: [3, 4],
+        mapPosition: {
+          x: 3,
+          y: 4
+        },
         type: MAP_POSITION_TYPE.ROOM,
         canMoveTo: [DIRECTIONS.RIGHT, DIRECTIONS.UP, DIRECTIONS.LEFT],
         freeMoveTo: null,
@@ -194,7 +265,10 @@ export function getMapJson() {
         zombieSpawnInitial: 0,
       },
       {
-        mapPosition: [3, 5],
+        mapPosition: {
+          x: 3,
+          y: 5
+        },
         type: MAP_POSITION_TYPE.ROOM,
         canMoveTo: [DIRECTIONS.UP, DIRECTIONS.LEFT],
         freeMoveTo: null,
