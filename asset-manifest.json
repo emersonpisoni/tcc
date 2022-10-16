@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/tcc/static/css/main.e967951a.css",
-    "main.js": "/tcc/static/js/main.000bbe84.js",
+    "main.js": "/tcc/static/js/main.102e34f1.js",
     "static/media/wall-porta.png": "/tcc/static/media/wall-porta.ace98309882bf1ae572c.png",
     "static/media/street.jpg": "/tcc/static/media/street.6f4c473ff3f1c3d1b68c.jpg",
     "static/media/building.jpg": "/tcc/static/media/building.a8a101799c0e0b06a1c4.jpg",
     "static/media/wall.jpg": "/tcc/static/media/wall.1c07ebec75e415244ba3.jpg",
     "index.html": "/tcc/index.html",
     "main.e967951a.css.map": "/tcc/static/css/main.e967951a.css.map",
-    "main.000bbe84.js.map": "/tcc/static/js/main.000bbe84.js.map"
+    "main.102e34f1.js.map": "/tcc/static/js/main.102e34f1.js.map"
   },
   "entrypoints": [
     "static/css/main.e967951a.css",
-    "static/js/main.000bbe84.js"
+    "static/js/main.102e34f1.js"
   ]
 }
