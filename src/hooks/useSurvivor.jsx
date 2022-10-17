@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useMoveSurvivor } from "./useMoveSurvivor";
 
-export function useSurvivor(board) {
-  const [survivor, setSurvivor] = useState()
+export function useSurvivor(board, initialSurvivor, socket) {
+  const [survivor, setSurvivor] = useState(initialSurvivor)
   const [position, moveSurvivor] = useMoveSurvivor(board)
 
   useEffect(() => {

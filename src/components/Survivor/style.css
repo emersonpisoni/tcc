@@ -1,9 +1,21 @@
+
+@keyframes survivor-animation {
+  from {
+    background-position-x: 0px;
+  }
+  to { 
+    background-position-x: -192px;
+  }
+}
+
 .survivor {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  transition: all 1s;
-  border-radius: 30px;
+  width: 48px;
+  height: 130px;
+  animation: survivor-animation .5s steps(4) infinite;
+  background-position-y: -35px;
+  height: 62px;
+  transform: translatez(32px) rotateX(270deg);
 }
 
 .isCurrentSurvivor {

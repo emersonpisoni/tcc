@@ -7,20 +7,55 @@ import { Joystick } from '../Joystick/Joystick'
 import { SelectSurvivor } from '../SelectSurvivor/SelectSurvivor'
 import { DIRECTIONS } from '../../utils/constants'
 import { useSurvivor } from '../../hooks/useSurvivor'
+import survivorImage from '../../images/survivor.png'
+import socketClient from 'socket.io-client'
 
-export function Board() {
+
+export function Board({ socket, survivors }) {
   const [board, setBoard] = useState([])
   const [currentSurvivor, setCurrentSurvivor] = useState('')
-  const [survivor1, setSurvivor1, moveSurvivor1] = useSurvivor(getMapJson())
-  const [survivor2, setSurvivor2, moveSurvivor2] = useSurvivor(getMapJson())
-  const [survivor3, setSurvivor3, moveSurvivor3] = useSurvivor(getMapJson())
-  const [survivor4, setSurvivor4, moveSurvivor4] = useSurvivor(getMapJson())
-  const [survivor5, setSurvivor5, moveSurvivor5] = useSurvivor(getMapJson())
-  const [survivor6, setSurvivor6, moveSurvivor6] = useSurvivor(getMapJson())
-  const [survivor7, setSurvivor7, moveSurvivor7] = useSurvivor(getMapJson())
+  const [survivor1, setSurvivor1, moveSurvivor1] = useSurvivor(getMapJson(), survivors[0])
+  const [survivor2, setSurvivor2, moveSurvivor2] = useSurvivor(getMapJson(), survivors[1])
+  const [survivor3, setSurvivor3, moveSurvivor3] = useSurvivor(getMapJson(), survivors[2])
+  const [survivor4, setSurvivor4, moveSurvivor4] = useSurvivor(getMapJson(), survivors[3])
+  const [survivor5, setSurvivor5, moveSurvivor5] = useSurvivor(getMapJson(), survivors[4])
+  const [survivor6, setSurvivor6, moveSurvivor6] = useSurvivor(getMapJson(), survivors[5])
+  const [canMove, setCanMove] = useState(false)
+
+  useEffect(() => {
+    console.log('survivor1', survivor1)
+  }, [survivor1])
+
+  useEffect(() => {
+    if (hasSurvivors() && canMove) {
+      console.log(getCurrentSurvivorByName(currentSurvivor).state);
+      socket.emit('MoveSurvivor', getCurrentSurvivorByName(currentSurvivor).state)
+      setCanMove(false)
+    }
+
+  }, [survivor1, survivor2, survivor3, survivor4, survivor5, survivor6])
 
   useEffect(() => {
     getBoard()
+
+    socket.on('RefreshSurvivors', (newSurvivor, socketId) => {
+      if (socketId !== socket.id && hasSurvivors()) {
+
+        console.log('SURV', newSurvivor)
+        const oldSurvivor = getCurrentSurvivorByName(newSurvivor.name)
+        oldSurvivor.setState(newSurvivor)
+        // setSurvivor1(newSurvivors[0])
+        // setSurvivor2(newSurvivors[1])
+        // setSurvivor3(newSurvivors[2])
+        // setSurvivor4(newSurvivors[3])
+        // setSurvivor5(newSurvivors[4])
+        // setSurvivor6(newSurvivors[5])
+      }
+    })
+
+    socket.on('SetCurrentSurvivor', (survName) => {
+      setCurrentSurvivor(survName)
+    })
   }, [])
 
   useEffect(() => {
@@ -47,14 +82,20 @@ export function Board() {
       setSurvivor4(survivorsWithInitialPosition[3])
       setSurvivor5(survivorsWithInitialPosition[4])
       setSurvivor6(survivorsWithInitialPosition[5])
-      setSurvivor7(survivorsWithInitialPosition[6])
+
+      socket.emit('AddSurvivors', survivorsWithInitialPosition)
     } catch (error) {
       console.log(error)
     }
   }
 
+  function hasSurvivors() {
+    return getAllSurvivors().filter(survivor => survivor.state).length === 6
+  }
+
   function selectCurrentSurvivorToPlay(survivorName) {
     setCurrentSurvivor(survivorName)
+    socket.emit('SetCurrentSurvivor', survivorName)
   }
 
   function getCurrentSurvivorByName(survivorName) {
@@ -69,7 +110,6 @@ export function Board() {
       { state: survivor4, setState: setSurvivor4, moveSurvivor: moveSurvivor4 },
       { state: survivor5, setState: setSurvivor5, moveSurvivor: moveSurvivor5 },
       { state: survivor6, setState: setSurvivor6, moveSurvivor: moveSurvivor6 },
-      { state: survivor7, setState: setSurvivor7, moveSurvivor: moveSurvivor7 },
     ]
   }
 
@@ -88,6 +128,7 @@ export function Board() {
               type={position.type}
               mapPosition={position.mapPosition}
               canMoveTo={position.canMoveTo}
+              freeMoveTo={position.freeMoveTo}
             />
           )
         })}
@@ -100,7 +141,12 @@ export function Board() {
             color={survivor.state.color} />
         })}
       </div>
-      <Joystick onClick={moveSurvivor} />
+      <Joystick onClick={(direction) => {
+        if (currentSurvivor) {
+          moveSurvivor(direction)
+          setCanMove(true)
+        }
+      }} />
       <SelectSurvivor survivors={getAllSurvivors()} onclick={selectCurrentSurvivorToPlay} />
     </div>
   )

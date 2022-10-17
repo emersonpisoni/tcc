@@ -8,14 +8,3 @@
   perspective: 1000px;
   background-image: linear-gradient(to bottom right, red, yellow);
 }
-
-.board {
-  display: grid;
-  position: relative;
-  /* transform: rotateX(47deg) rotateY(8deg) rotateZ(346deg); */
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  transform: rotateX(42deg);
-  box-shadow: 0px 20px 17px 4px #000;
-}
-
