@@ -1,5 +1,46 @@
 import { DIRECTIONS, MAP_POSITION_TYPE } from "../utils/constants";
 
+export function items() {
+  return [
+    {
+      name: 'PISTOLA',
+      canBeDouble: true,
+      distanceToUse: [0, 1],
+      diceQuantity: 1,
+      diceValueToHit: 3,
+      damage: 1,
+      makeNoiseOnDoors: false,
+      makeNoiseOnZombies: true,
+      munitionType: 'BULLETS',
+      canBrokeDoors: false,
+    },
+    {
+      name: 'MACHADO',
+      canBeDouble: false,
+      distanceToUse: [0, 0],
+      diceQuantity: 1,
+      diceValueToHit: 4,
+      damage: 2,
+      makeNoiseOnDoors: true,
+      makeNoiseOnZombies: false,
+      munitionType: null,
+      canBrokeDoors: false,
+    },
+    {
+      name: 'MOTOSERRA',
+      canBeDouble: false,
+      distanceToUse: [0, 0],
+      diceQuantity: 5,
+      diceValueToHit: 5,
+      damage: 2,
+      makeNoiseOnDoors: true,
+      makeNoiseOnZombies: true,
+      munitionType: null,
+      canBrokeDoors: true,
+    },
+  ]
+}
+
 export function getSurvivorsJson() {
   return [
     {

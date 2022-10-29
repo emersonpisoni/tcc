@@ -23,16 +23,10 @@ export function Board({ socket, survivors }) {
   const [canMove, setCanMove] = useState(false)
 
   useEffect(() => {
-    console.log('survivor1', survivor1)
-  }, [survivor1])
-
-  useEffect(() => {
     if (hasSurvivors() && canMove) {
-      console.log(getCurrentSurvivorByName(currentSurvivor).state);
       socket.emit('MoveSurvivor', getCurrentSurvivorByName(currentSurvivor).state)
       setCanMove(false)
     }
-
   }, [survivor1, survivor2, survivor3, survivor4, survivor5, survivor6])
 
   useEffect(() => {
@@ -44,12 +38,6 @@ export function Board({ socket, survivors }) {
         console.log('SURV', newSurvivor)
         const oldSurvivor = getCurrentSurvivorByName(newSurvivor.name)
         oldSurvivor.setState(newSurvivor)
-        // setSurvivor1(newSurvivors[0])
-        // setSurvivor2(newSurvivors[1])
-        // setSurvivor3(newSurvivors[2])
-        // setSurvivor4(newSurvivors[3])
-        // setSurvivor5(newSurvivors[4])
-        // setSurvivor6(newSurvivors[5])
       }
     })
 

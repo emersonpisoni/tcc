@@ -5,9 +5,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: "Zombie";
+}
+
+* {
+  font-family: "Zombie";
+  font-size: 20px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: "Zombie";
+  src: local("Zombie"),
+   url("./fonts/Zombie/zombie.ttf") format("truetype");
+  font-weight: bold;
 }

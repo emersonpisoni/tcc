@@ -2,37 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Board } from './components/Board/Board';
-import { Game } from './components/Game/Game';
-import { RouterProvider, createHashRouter, HashRouter, Routes, Route } from 'react-router-dom';
+import { Menu } from './components/Menu/Menu';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import socketClient from 'socket.io-client'
 import { getSurvivorsJson } from './api/api';
+import './fonts/Zombie/zombie.ttf'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// const socket = socketClient('https://protected-crag-78513.herokuapp.com')
 const socket = socketClient('http://localhost:4000')
 socket.on('connect', () => {
-  console.log('Conectado no front')
+  console.log('Conexão inicial')
 })
-
-socket.on('PlayerConnected', (players) => {
-  console.log(players)
-})
-
-socket.on('PlayersRefresh', players => {
-  console.log(players)
-})
-
 
 
 root.render(
-  <React.StrictMode>
-    <HashRouter>
-      <Routes>
-        <Route exact path='/' element={<Game />} />
-        <Route exact path='board' element={<Board socket={socket} survivors={getSurvivorsJson()} />} />
-      </Routes>
-    </HashRouter>
-
-    {/* <RouterProvider router={router} /> */}
-  </React.StrictMode>
+  <HashRouter>
+    <Routes>
+      <Route exact path='/' element={<Menu socket={socket} />} />
+      <Route exact path='board' element={<Board socket={socket} survivors={getSurvivorsJson()} />} />
+    </Routes>
+  </HashRouter>
 );

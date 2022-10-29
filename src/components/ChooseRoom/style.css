@@ -1,0 +1,19 @@
+.choose-room {
+  position: absolute;
+}
+
+.room {
+  display: flex;
+  flex-direction: column;
+  background-color: antiquewhite;
+  filter: opacity(.8);
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.room-player {
+  margin: 10px 0;
+  width: 100%;
+  height: 20px;
+}
