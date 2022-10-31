@@ -6,7 +6,6 @@ export function useMoveSurvivor(board) {
 
   function moveSurvivor(direction, survivorPosition) {
     const boardCurrentPosition = board.positions.find(position => position.mapPosition.x === survivorPosition.x && position.mapPosition.y === survivorPosition.y)
-    console.log('fewfwefewf', boardCurrentPosition)
 
     switch (direction) {
       case DIRECTIONS.DOWN:

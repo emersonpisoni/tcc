@@ -11,11 +11,10 @@ export function ChooseRoom({ socket, name, onNext }) {
     socket.emit('AddPlayer', name)
 
     socket.on('PlayersConnected', (players) => {
-      console.log(players)
       setPlayers(players)
     })
 
-    socket.on('PlayersRefresh', players => {
+    socket.on('UpdatePlayers', players => {
       setPlayers(players)
     })
   }, [])

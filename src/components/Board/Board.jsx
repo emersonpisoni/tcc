@@ -35,7 +35,6 @@ export function Board({ socket, survivors }) {
     socket.on('RefreshSurvivors', (newSurvivor, socketId) => {
       if (socketId !== socket.id && hasSurvivors()) {
 
-        console.log('SURV', newSurvivor)
         const oldSurvivor = getCurrentSurvivorByName(newSurvivor.name)
         oldSurvivor.setState(newSurvivor)
       }

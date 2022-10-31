@@ -8,9 +8,9 @@ export function SelectSurvivor({ survivors, onclick }) {
         <Button
           className='select-surv-button'
           key={`select-survivor-button${index}`}
-          onClick={() => onclick(survivor.state.name)}
+          onClick={() => onclick(survivor)}
         >
-          {survivor.state.name}
+          {survivor.name}
         </Button>)}
     </div>
   )

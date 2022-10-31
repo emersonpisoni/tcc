@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { MenuOptions } from '../MenuOptions/MenuOptions';
 import { ChooseRoom } from '../ChooseRoom/ChooseRoom';
 import { ChooseSurvivors } from '../ChooseSurvivors/ChooseSurvivors';
+import { useEffect } from 'react';
 
 const MENU_STATE = {
   CHOOSE_NAME: 'CHOOSE_NAME',
@@ -16,6 +17,12 @@ export function Menu({ socket }) {
   const [stage, setStage] = useState(MENU_STATE.CHOOSE_NAME)
   const [name, setName] = useState('')
 
+  useEffect(() => {
+    socket.on('GoToChooseSurvivors', () => {
+      setStage(MENU_STATE.CHOOSE_SURVIVORS)
+    })
+  }, [])
+
   function onChangeName(e) {
     setName(e.target.value)
   }
@@ -25,7 +32,7 @@ export function Menu({ socket }) {
   }
 
   function onGoToChooseSurvivors() {
-    setStage(MENU_STATE.CHOOSE_SURVIVORS)
+    socket.emit('GoToChooseSurvivors')
   }
 
   return <div className='menu'>

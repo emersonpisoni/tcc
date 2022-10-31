@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { getSurvivorsJson, getSurvivorsToChoose } from '../../api/api'
 import { Button } from '../Button/Button'
 import './style.css'
 
 export function ChooseSurvivors({ socket }) {
+  const navigate = useNavigate()
 
   const [players, setPlayers] = useState([])
   const [availableSurvivors, setAvailableSurvivors] = useState([])
 
-  console.log(players)
   const disableStartGameButton = players.map(player => player.survivors.length)?.reduce((total, num) => total + num, 0) < 6
 
   useEffect(() => {
@@ -23,6 +23,10 @@ export function ChooseSurvivors({ socket }) {
 
     socket.on('UpdateAddSurvivorsToPlay', (players) => {
       setPlayers(players)
+    })
+
+    socket.on('StartGame', () => {
+      navigate('/board')
     })
   }, [])
 
@@ -77,11 +81,11 @@ export function ChooseSurvivors({ socket }) {
           )
         })}
       </div>
-      <Link className='start' to={`board`}>
-        <Button disabled={disableStartGameButton} className='survivor-select-button'>
-          Iniciar Jogo
-        </Button>
-      </Link>
+      {/* <Link className='start' to={`/board`}> */}
+      <Button onClick={() => socket.emit('StartGame')} disabled={disableStartGameButton} className='survivor-select-button'>
+        Iniciar Jogo
+      </Button>
+      {/* </Link> */}
     </>
   )
 }

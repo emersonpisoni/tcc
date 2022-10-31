@@ -1,7 +1,7 @@
 import './style.css'
 import survivorImage from '../../images/survivor.png'
 
-export function Survivor({ position, index, color, isCurrentSurvivor }) {
+export function Survivor({ position, index, color = 'black', isCurrentSurvivor }) {
   return (
     <div
       className={`survivor ${isCurrentSurvivor && 'isCurrentSurvivor'}`}
