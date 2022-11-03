@@ -1,5 +1,5 @@
 
-@keyframes survivor-animation {
+@keyframes zombie-animation {
   from {
     background-position-x: 0px;
   }
@@ -8,7 +8,7 @@
   }
 }
 
-@keyframes survivor-base-animation {
+@keyframes zombie-base-animation {
   0% {
     opacity: .2;
   }
@@ -20,17 +20,19 @@
   }
 }
 
-.survivor {
+
+.zombie {
   position: absolute;
   width: 48px;
   height: 130px;
-  animation: survivor-animation .5s steps(4) infinite;
+  animation: zombie-animation .5s steps(4) infinite;
   background-position-y: -35px;
   height: 62px;
   transform: translatez(32px) rotateX(270deg);
+  filter: invert();
 }
 
-.survivor-base {
+.zombie-base {
   position: absolute;
   width: 50px;
   height: 50px;
@@ -38,6 +40,6 @@
   border-radius: 50%;
 }
 
-.isCurrentSurvivor {
-  animation: survivor-base-animation 1s infinite;
+.isCurrentZombie {
+  animation: zombie-base-animation 1s infinite;
 }

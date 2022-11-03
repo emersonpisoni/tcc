@@ -9,12 +9,15 @@ import { DIRECTIONS } from '../../utils/constants'
 import { useSurvivor } from '../../hooks/useSurvivor'
 import survivorImage from '../../images/survivor.png'
 import socketClient from 'socket.io-client'
+import { Zombie } from '../Zombie/Zombie'
+import { Button } from '../Button/Button'
 
 
 export function Board2({ socket }) {
   const [board, setBoard] = useState([])
   const [currentSurvivor, setCurrentSurvivor] = useState()
   const [players, setPlayers] = useState([])
+  const [canSelectNextSurvivor, setCanSelectNextSurvivor] = useState(false)
 
   useEffect(() => {
     socket.emit('GetBoard')
@@ -30,7 +33,22 @@ export function Board2({ socket }) {
 
     socket.on('UpdatePlayers', players => {
       setPlayers(players)
+
+      setCurrentSurvivor()
     })
+
+    socket.on('UpdateGame', ({ players, currentSurvivor, board }) => {
+      console.log(board);
+      setBoard(board)
+      setPlayers(players)
+      setCurrentSurvivor(currentSurvivor)
+    })
+
+    socket.on('NextSurvivor', () => {
+      setCanSelectNextSurvivor(true)
+    })
+
+    startZombiesRound()
   }, [])
 
 
@@ -39,8 +57,6 @@ export function Board2({ socket }) {
   }
 
   function selectCurrentSurvivorToPlay(surv) {
-    setCurrentSurvivor(surv)
-
     socket.emit('SelectCurrentSurvivor', surv.name)
   }
 
@@ -49,46 +65,78 @@ export function Board2({ socket }) {
 
     switch (direction) {
       case DIRECTIONS.DOWN:
-        if (boardCurrentPosition.canMoveTo.includes(DIRECTIONS.DOWN)) {
-          currentSurvivor.position = {
+        if (boardCurrentPosition.canMoveTo.includes(DIRECTIONS.DOWN) || boardCurrentPosition.freeMoveTo.includes(DIRECTIONS.DOWN)) {
+          const newPosition = {
             x: currentSurvivor.position.x + 1,
             y: currentSurvivor.position.y
           }
+          socket.emit('MoveSurvivor', { ...currentSurvivor, position: newPosition }, boardCurrentPosition.freeMoveTo.includes(DIRECTIONS.DOWN))
         }
         break
       case DIRECTIONS.UP:
-        if (boardCurrentPosition.canMoveTo.includes(DIRECTIONS.UP)) {
-          currentSurvivor.position = {
+        if (boardCurrentPosition.canMoveTo.includes(DIRECTIONS.UP) || boardCurrentPosition.freeMoveTo.includes(DIRECTIONS.UP)) {
+          const newPosition = {
             x: currentSurvivor.position.x - 1,
             y: currentSurvivor.position.y
           }
+          socket.emit('MoveSurvivor', { ...currentSurvivor, position: newPosition }, boardCurrentPosition.freeMoveTo.includes(DIRECTIONS.UP))
         }
         break
       case DIRECTIONS.LEFT:
-        if (boardCurrentPosition.canMoveTo.includes(DIRECTIONS.LEFT)) {
-          currentSurvivor.position = {
+        if (boardCurrentPosition.canMoveTo.includes(DIRECTIONS.LEFT) || boardCurrentPosition.freeMoveTo.includes(DIRECTIONS.LEFT)) {
+          const newPosition = {
             x: currentSurvivor.position.x,
             y: currentSurvivor.position.y - 1
           }
+          socket.emit('MoveSurvivor', { ...currentSurvivor, position: newPosition }, boardCurrentPosition.freeMoveTo.includes(DIRECTIONS.LEFT))
         }
         break
       case DIRECTIONS.RIGHT:
-        if (boardCurrentPosition.canMoveTo.includes(DIRECTIONS.RIGHT)) {
-          currentSurvivor.position = {
+        if (boardCurrentPosition.canMoveTo.includes(DIRECTIONS.RIGHT) || boardCurrentPosition.freeMoveTo.includes(DIRECTIONS.RIGHT)) {
+          const newPosition = {
             x: currentSurvivor.position.x,
             y: currentSurvivor.position.y + 1
           }
+          socket.emit('MoveSurvivor', { ...currentSurvivor, position: newPosition }, boardCurrentPosition.freeMoveTo.includes(DIRECTIONS.RIGHT))
         }
         break
       default:
         break;
     }
 
-    socket.emit('MoveSurvivor', currentSurvivor)
+  }
+
+  function startZombiesRound() {
+    setCanSelectNextSurvivor(false)
+    socket.emit('StartZombieRound')
+  }
+
+  function selectNextSurv() {
+    setCanSelectNextSurvivor(false)
+    const qtdMySurvs = getPlayerBySocketId().survivors.length
+    const myCurrentSurvIndex = getPlayerBySocketId().survivors.findIndex(surv => surv.name === currentSurvivor.name)
+    const isMyLastSurvToPlay = myCurrentSurvIndex === qtdMySurvs - 1
+    const amILastPlayer = players.length - 1 === players.findIndex(player => player.socketId === socket.id)
+
+    if (isMyLastSurvToPlay) {
+      if (amILastPlayer) {
+        console.log('ultom');
+        startZombiesRound()
+      }
+      else {
+        selectCurrentSurvivorToPlay(players[players.findIndex(player => player.socketId === socket.id) + 1].survivors[0])
+      }
+    } else {
+      selectCurrentSurvivorToPlay(getPlayerBySocketId().survivors[myCurrentSurvIndex + 1])
+    }
   }
 
   function getPlayerBySocketId() {
     return players.find(player => player.socketId === socket.id)
+  }
+
+  function isMySurvPlaying() {
+    return getPlayerBySocketId()?.survivors?.some(surv => surv.name === currentSurvivor?.name)
   }
 
   function getHighestLevel() {
@@ -107,7 +155,8 @@ export function Board2({ socket }) {
   return (
     <div className='game'>
       <div className='game-status'>
-        <div>{currentSurvivor?.name} Jogando...</div>
+        <div>Vez de {players.find(player => player.survivors.some(surv => surv.name === currentSurvivor?.name))?.name}</div>
+        <div>{currentSurvivor?.name} Jogando... Restam {currentSurvivor?.actions} ações</div>
         <div>Nível atual do board: {getHighestLevel()} <div style={{ backgroundColor: getColorByLevel(), width: 20, height: 20 }}></div></div>
       </div>
       <div className="board">
@@ -116,9 +165,7 @@ export function Board2({ socket }) {
             <MapPosition
               key={`map-position-${position.mapPosition.x}${position.mapPosition.y}`}
               type={position.type}
-              mapPosition={position.mapPosition}
-              canMoveTo={position.canMoveTo}
-              freeMoveTo={position.freeMoveTo}
+              position={position}
             />
           )
         })}
@@ -130,9 +177,11 @@ export function Board2({ socket }) {
             index={index + 1}
             color={survivor.color} />
         })}
+        {board?.zombies?.map((zombie, index) => {
+          return <Zombie position={zombie.position} index={index + 1} isCurrentZombie={board?.currentZombieIndex === index} />
+        })}
       </div>
-      <Joystick onClick={moveSurvivor} />
-      {/* <SelectSurvivor survivors={getPlayerBySocketId()?.survivors} onclick={selectCurrentSurvivorToPlay} /> */}
+      {isMySurvPlaying() && <Joystick onClick={moveSurvivor} />}
       <div className='my-survivors'>
         {getPlayerBySocketId()?.survivors.map(surv => {
           return (
@@ -143,12 +192,14 @@ export function Board2({ socket }) {
                 return (
                   <div className='my-survivors-surv-ability' style={{ backgroundColor: level }}>{name}</div>
                 )
-              })}</div>
+              })}
+              </div>
             </div>
           )
         })}
       </div>
-    </div>
+      {canSelectNextSurvivor && isMySurvPlaying() && <Button onClick={selectNextSurv} className='next-surv'>Próximo Sobrevivente</Button>}
+    </div >
   )
 }
 

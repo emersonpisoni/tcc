@@ -8,8 +8,21 @@
   background-color: antiquewhite;
   filter: opacity(.8);
   padding: 20px;
+  padding-top: 40px;
   border-radius: 20px;
   margin-bottom: 20px;
+  position: relative;
+}
+
+.room-name {
+  position: absolute;
+  display: flex;
+  background-color: rgb(65, 0, 0);
+  padding: 20px;
+  border-radius: 20px;
+  top: -30px;
+  left: -20px;
+  color: white;
 }
 
 .room-player {

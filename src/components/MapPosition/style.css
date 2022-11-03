@@ -7,3 +7,44 @@
   background-size: cover;
   transform-style: preserve-3d;
 }
+
+.map-position-goal {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgba(255, 0, 0, 0.449);
+}
+
+.map-position-gun-box {
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 0, 0.523);
+  width: min-content;
+}
+
+.map-position-evacuate {
+  background-color: #ffff003b;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-position-zombie_spawn {
+  background-color: #ff00003b;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-position-zombie {
+  background-color: green;
+  width: 10px;
+  /* position: absolute; */
+  height: 10px;
+
+}

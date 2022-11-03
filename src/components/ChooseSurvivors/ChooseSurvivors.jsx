@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getSurvivorsJson, getSurvivorsToChoose } from '../../api/api'
 import { Button } from '../Button/Button'
+import { Spacer } from '../Spacer/Spacer'
 import './style.css'
 
 export function ChooseSurvivors({ socket }) {
@@ -47,19 +48,29 @@ export function ChooseSurvivors({ socket }) {
               className={`available-survivor ${playerWithThisSurvivor && isSelected}`}
               onClick={() => onChooseSurvivor((availableSurvivor))}
             >
-              <div>Nome: {availableSurvivor.name}</div>
-              <div>Vida: {availableSurvivor.life}</div>
-              <div>{availableSurvivor.isChild && '(▀̿Ĺ̯▀̿ ̿)'}</div>
-              {/* <div>{availableSurvivor.inventory}</div> */}
-              {/* <div>{availableSurvivor.level}</div> */}
-              {/* <div>{availableSurvivor.abilities.map(ability => {
-              return (
-                <div className='available-survivor-ability'>
-                  {ability.name}
-                  {ability.level}
+              <div className='available-survivor-left'>
+                <div className='available-survivor-name'>
+                  {availableSurvivor.name}
                 </div>
-              )
-            })}</div> */}
+                <div className='available-survivor-abilities'>
+                  {availableSurvivor.abilities.map(ability => {
+                    return (
+                      <div className='available-survivor-ability'>
+                        <div style={{ width: 20, height: 20, backgroundColor: ability.level, borderRadius: 20 }} />
+                        <Spacer width={10} />
+                        <div>{ability.name}</div>
+                      </div>
+                    )
+                  })}</div>
+              </div>
+              <Spacer width={30} />
+              <div className='available-survivor-right'>
+                <div>{availableSurvivor.isChild && '(▀̿Ĺ̯▀̿ ̿)'}</div>
+                <div className='available-survivor-life'>
+                  {Array.from({ length: availableSurvivor.life + 1 }, (_, i) => i).map((value) => {
+                    return <div style={{ backgroundColor: value === 0 ? 'black' : '' }}>{value}</div>
+                  })}</div>
+              </div>
             </button>
           )
         })}

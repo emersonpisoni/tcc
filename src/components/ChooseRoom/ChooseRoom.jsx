@@ -22,7 +22,8 @@ export function ChooseRoom({ socket, name, onNext }) {
 
   return <div className='choose-room'>
     <div className='room'>
-      {players.map(player => <div key={player.socketId} className='room-player'>{player.name}</div>)}
+      <span className='room-name'>Sala</span>
+      {players.map((player, i) => <div key={player.socketId} className='room-player'>{`Jogador ${i + 1}: ${player.name}`}</div>)}
     </div>
     {/* <Link className='start' to={`board`}> */}
     <Button onClick={onNext}>Start Game</Button>

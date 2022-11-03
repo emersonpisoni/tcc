@@ -29,7 +29,7 @@
 .my-survivors {
   display: flex;
   position: absolute;
-  transform: translateY(900px);
+  transform: translateY(700px);
 }
 
 .my-survivors-surv {
@@ -47,7 +47,7 @@
 
 .my-survivors-surv:hover {
   /* margin-bottom: 100px; */
-  transform: translateY(-940px);
+  transform: translateY(-550px);
 }
 
 .my-survivors-surv-abilities {
@@ -59,4 +59,11 @@
   border: 1px solid black;
   padding: 10px;
   margin: 5px 0;
+}
+
+.next-surv {
+  position: absolute;
+  width: 200px;
+  top: 270px;
+  right: 60px;
 }
