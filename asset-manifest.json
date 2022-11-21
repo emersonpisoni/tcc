@@ -1,17 +1,20 @@
 {
   "files": {
-    "main.css": "/tcc/static/css/main.e967951a.css",
-    "main.js": "/tcc/static/js/main.abb67b96.js",
+    "main.css": "/tcc/static/css/main.13a22ca5.css",
+    "main.js": "/tcc/static/js/main.fc1762a7.js",
     "static/media/wall-porta.png": "/tcc/static/media/wall-porta.ace98309882bf1ae572c.png",
+    "static/media/apocalipse.jpg": "/tcc/static/media/apocalipse.6c6bab383c0836441513.jpg",
     "static/media/street.jpg": "/tcc/static/media/street.6f4c473ff3f1c3d1b68c.jpg",
     "static/media/building.jpg": "/tcc/static/media/building.a8a101799c0e0b06a1c4.jpg",
+    "static/media/logo2.png": "/tcc/static/media/logo2.86c8601216ea658638e7.png",
     "static/media/wall.jpg": "/tcc/static/media/wall.1c07ebec75e415244ba3.jpg",
+    "static/media/zombie.ttf": "/tcc/static/media/zombie.239f651e177dbeccc1ee.ttf",
     "index.html": "/tcc/index.html",
-    "main.e967951a.css.map": "/tcc/static/css/main.e967951a.css.map",
-    "main.abb67b96.js.map": "/tcc/static/js/main.abb67b96.js.map"
+    "main.13a22ca5.css.map": "/tcc/static/css/main.13a22ca5.css.map",
+    "main.fc1762a7.js.map": "/tcc/static/js/main.fc1762a7.js.map"
   },
   "entrypoints": [
-    "static/css/main.e967951a.css",
-    "static/js/main.abb67b96.js"
+    "static/css/main.13a22ca5.css",
+    "static/js/main.fc1762a7.js"
   ]
 }
