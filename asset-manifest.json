@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/tcc/static/css/main.cc257301.css",
-    "main.js": "/tcc/static/js/main.e87736fe.js",
+    "main.js": "/tcc/static/js/main.e076d8a1.js",
     "static/media/wall-porta.png": "/tcc/static/media/wall-porta.ace98309882bf1ae572c.png",
     "static/media/apocalipse.jpg": "/tcc/static/media/apocalipse.6c6bab383c0836441513.jpg",
     "static/media/street.jpg": "/tcc/static/media/street.6f4c473ff3f1c3d1b68c.jpg",
@@ -11,10 +11,10 @@
     "static/media/zombie.ttf": "/tcc/static/media/zombie.239f651e177dbeccc1ee.ttf",
     "index.html": "/tcc/index.html",
     "main.cc257301.css.map": "/tcc/static/css/main.cc257301.css.map",
-    "main.e87736fe.js.map": "/tcc/static/js/main.e87736fe.js.map"
+    "main.e076d8a1.js.map": "/tcc/static/js/main.e076d8a1.js.map"
   },
   "entrypoints": [
     "static/css/main.cc257301.css",
-    "static/js/main.e87736fe.js"
+    "static/js/main.e076d8a1.js"
   ]
 }
