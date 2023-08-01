@@ -10,6 +10,7 @@ export function ChooseSurvivors({ socket }) {
   const navigate = useNavigate()
 
   const [players, setPlayers] = useState([])
+  const [allSelecteds, setAllSelecteds] = useState(false)
   const [availableSurvivors, setAvailableSurvivors] = useState([])
 
   const disableStartGameButton = players.map(player => player.survivors.length)?.reduce((total, num) => total + num, 0) < 6
@@ -22,7 +23,8 @@ export function ChooseSurvivors({ socket }) {
       setPlayers(players)
     })
 
-    socket.on('UpdateAddSurvivorsToPlay', (players) => {
+    socket.on('UpdateAddSurvivorsToPlay', (players, hasSixSurvs) => {
+      setAllSelecteds(hasSixSurvs)
       setPlayers(players)
     })
 
@@ -44,8 +46,8 @@ export function ChooseSurvivors({ socket }) {
 
           return (
             <button
-              disabled={playerWithThisSurvivor && isSelected === 'selected-by-other'}
-              className={`available-survivor ${playerWithThisSurvivor && isSelected}`}
+              disabled={(playerWithThisSurvivor && isSelected === 'selected-by-other') || (!playerWithThisSurvivor && allSelecteds)}
+              className={`available-survivor ${(playerWithThisSurvivor && isSelected) || (!playerWithThisSurvivor && allSelecteds && 'selected-by-other')}`}
               onClick={() => onChooseSurvivor((availableSurvivor))}
             >
               <div className='available-survivor-left'>

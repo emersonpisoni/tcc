@@ -28,6 +28,7 @@ export function Menu({ socket }) {
   }
 
   function onNextStep() {
+    socket.emit('AddPlayer', name)
     setStage(MENU_STATE.CHOOSE_ROOM)
   }
 

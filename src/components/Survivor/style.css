@@ -27,7 +27,7 @@
   animation: survivor-animation .5s steps(4) infinite;
   background-position-y: -35px;
   height: 62px;
-  transform: translatez(32px) rotateX(270deg);
+  transform: translatez(32px) rotateX(292deg) translateZ(-8px);
 }
 
 .survivor-base {
@@ -40,4 +40,12 @@
 
 .isCurrentSurvivor {
   animation: survivor-base-animation 1s infinite;
+}
+
+.survivor-info {
+  background-color: rgba(255, 255, 255, 0.589);
+  position: absolute;
+  top: -25px;
+  padding: 2px 7px;
+  border-radius: 20px;
 }

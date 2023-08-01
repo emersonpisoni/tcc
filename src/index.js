@@ -11,18 +11,20 @@ import { Board2 } from './components/Board/Board2';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-// const socket = socketClient('https://protected-crag-78513.herokuapp.com')
 const socket = socketClient('http://localhost:4000')
+// const socket = socketClient('https://protected-crag-78513.herokuapp.com')
 socket.on('connect', () => {
   console.log('Conexão inicial')
 })
 
 
 root.render(
-  <HashRouter>
-    <Routes>
-      <Route exact path='/' element={<Menu socket={socket} />} />
-      <Route exact path='board' element={<Board2 socket={socket} />} />
-    </Routes>
-  </HashRouter>
+  <React.StrictMode>
+    <HashRouter>
+      <Routes>
+        <Route exact path='/' element={<Menu socket={socket} />} />
+        <Route exact path='/board' element={<Board2 socket={socket} />} />
+      </Routes>
+    </HashRouter>
+  </React.StrictMode>
 );

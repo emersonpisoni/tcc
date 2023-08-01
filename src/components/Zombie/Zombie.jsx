@@ -1,11 +1,11 @@
 import './style.css'
 import zombieImage from '../../images/survivor.png'
 
-export function Zombie({ position, index, color = 'black', isCurrentZombie }) {
+export function Zombie({ isOnFireline, zombie, position, index, color = 'black', isCurrentZombie }) {
   return (
     <>
       <div
-        className={`zombie`}
+        className={`zombie ${isOnFireline ? 'is-on-fireline' : ''}`}
         style={{
           gridRow: position.x,
           gridColumn: position.y,
@@ -16,6 +16,9 @@ export function Zombie({ position, index, color = 'black', isCurrentZombie }) {
           backgroundRepeat: 'no-repeat',
           borderColor: color
         }}>
+        <div className='zombie-info'>
+          {zombie.name}
+        </div>
       </div>
       <div
         className={`zombie-base  ${isCurrentZombie && 'isCurrentZombie'}`}

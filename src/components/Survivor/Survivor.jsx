@@ -1,7 +1,7 @@
 import './style.css'
 import survivorImage from '../../images/survivor.png'
 
-export function Survivor({ position, index, color = 'black', isCurrentSurvivor }) {
+export function Survivor({ survivor, position, index, color = 'black', isCurrentSurvivor }) {
   return (
     <>
       <div
@@ -16,6 +16,9 @@ export function Survivor({ position, index, color = 'black', isCurrentSurvivor }
           backgroundRepeat: 'no-repeat',
           borderColor: color,
         }}>
+        <div className='survivor-info'>
+          {survivor.name}
+        </div>
       </div>
       <div
         className={`survivor-base  ${isCurrentSurvivor && 'isCurrentSurvivor'}`}

@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  /* position: absolute; */
+  background-image: linear-gradient(to bottom right, rgb(17, 17, 17), rgb(68, 68, 68));
+  border-radius: 20px;
+  padding: 20px;
+  /* left: 40px;
+  top: 40px; */
+  flex-direction: column;
+  align-items: center;
+  color: aliceblue;
+
+}
+
+.card-title {
+  margin: 10px;
+}
+
+.card-dice-infos {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-dice-infos > div {
+  margin: 5px 0;
+}

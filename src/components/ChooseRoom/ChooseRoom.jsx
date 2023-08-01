@@ -8,8 +8,6 @@ export function ChooseRoom({ socket, name, onNext }) {
   const [players, setPlayers] = useState([])
 
   useEffect(() => {
-    socket.emit('AddPlayer', name)
-
     socket.on('PlayersConnected', (players) => {
       setPlayers(players)
     })
